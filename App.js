@@ -1,11 +1,15 @@
+import * as React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native";
 import { useState } from "react";
 import { ref, set } from "firebase/database";
 import { db } from "./components/config";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Authentication } from "./components/Authentication";
 
-export default function App() {
+function HomeScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   console.log(username);
@@ -46,8 +50,27 @@ export default function App() {
       <button style={styles.submitButton} onClick={handleClick}>
         Submit
       </button>
+      <button
+        style={styles.submitButton}
+        onClick={() => navigation.navigate("Authentication")}
+      >
+        Go to Auth
+      </button>
       <StatusBar style="auto" />
     </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Authentication" component={Authentication} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
