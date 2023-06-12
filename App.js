@@ -11,17 +11,17 @@ import { Authentication } from "./components/Authentication";
 
 function HomeScreen({ navigation }) {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [motto, setMotto] = useState("");
   console.log(username);
-  console.log(email);
+  console.log(motto);
   const handleClick = () => {
     set(ref(db, "users/" + username), {
       username: username,
-      email: email,
+      motto: motto,
     })
       .then(() => {
         setUsername("");
-        setEmail("");
+        setMotto("");
         alert("Successfully added");
       })
       .catch((error) => {
@@ -30,7 +30,7 @@ function HomeScreen({ navigation }) {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.textTop}>Test InsectiSpy</Text>
+      <Text style={styles.textTop}>Test Database</Text>
       <TextInput
         placeholder="Username"
         value={username}
@@ -40,10 +40,10 @@ function HomeScreen({ navigation }) {
         style={styles.textboxes}
       ></TextInput>
       <TextInput
-        placeholder="E-Mail"
-        value={email}
-        onChangeText={(email) => {
-          setEmail(email);
+        placeholder="Motto"
+        value={motto}
+        onChangeText={(motto) => {
+          setMotto(motto);
         }}
         style={styles.textboxes}
       ></TextInput>
