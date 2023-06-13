@@ -13,13 +13,25 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from "firebase/auth";
 
-export function Authentication() {
+export const auth = getAuth();
+export function Authentication({ navigation }) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
+  console.log(auth.currentUser);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      navigation.replace("Profile");
+      // ...
+    }
+  });
 
   function handleSignUp() {
     createUserWithEmailAndPassword(auth, email, password)

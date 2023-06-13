@@ -8,6 +8,7 @@ import { db } from "./components/config";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Authentication } from "./components/Authentication";
+import { Profile } from "./components/Profile";
 
 function HomeScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -69,6 +70,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Authentication" component={Authentication} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
